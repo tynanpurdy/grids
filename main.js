@@ -21,9 +21,7 @@ app.on("ready", loadMainWindow);
 // non-macOS systems may not quit on all windows closed
 // this will quit on all windows closed if not macOS
 app.on("window-all-closed", () => {
-    if (process.platform !== "darwin") {
-        app.quit();
-    }
+    app.quit();
 });
 
 // launch app when icon is clicked
