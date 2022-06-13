@@ -10,7 +10,7 @@
     --primary-5: #d0f3ef;
   
     /* Neutral colors */
-    --neutral-1: #2c2c2c;
+    --neutral-1: #121212;
     --neutral-2: #434343;
     --neutral-3: #94868b;
     --neutral-4: #d9cfd3;
@@ -23,19 +23,45 @@
     --accent-4: #e6c3ce;
     --accent-5: #fff2f7;
   }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 10px;
+  }
+
+  .header {
+    padding: 10px;
+  }
+
+  .main {
+    grid-column: 2 / span 3;
+  }
+
+  .sidebar {
+    grid-column: 1 / span 1;
+  }
+
+  #page {
+    width: auto;
+    height: auto;
+    border: var(--neutral-5) solid 1px;
+  }
   
   body {
-    background-color: var(--neutral-5);
-    margin: 0;
+    background-color: var(--neutral-1);
+    font-family: Helvetica, sans-serif;
+    color: white;
   }
   
   h1 {
+    font-family: Helvetica, sans-serif;
     font-size: 36px;
     font-weight: 600;
   }
   
   h2 {
-    font-size: 28px;
+    font-size: 20px;
     font-weight: 500;
   }
   
@@ -81,9 +107,9 @@
     margin-bottom: 15px;
   }
   
-  .form-section {
-    border-bottom: var(--neutral-4) solid 1px;
-    margin-bottom: 20px;
+  .form-group {
+    background-color: var(--neutral-2);
+    padding: 5px;
   }
   
   .input-required {
@@ -94,21 +120,22 @@
   }
   
   .label {
-    display: block;
+    /* display: block; */
+    font-size: 10px;
     font-weight: 500;
   }
   
   .input {
-    font-size: 16px;
+    font-size: 10px;
     margin-top: 1em;
     margin-bottom: 1.5em;
     padding: 0.75em 0.5em;
-    min-width: 200px;
+    /* min-width: 200px; */
     border: none;
-    border-left: 7px solid var(--neutral-4);
-    transition: border-left-color 160ms;
-    background-color: white;
-    width: 100%;
+    /* border-left: 7px solid var(--neutral-4); */
+    /* transition: border-left-color 160ms; */
+    /* background-color: white; */
+    /* width: 100%; */
   }
   
   ::placeholder {
@@ -116,7 +143,7 @@
   }
   
   input:not(.btn):focus {
-    outline: none;
+    outline: hidden;
     border-left: 7px solid var(--primary-1);
   }
   
