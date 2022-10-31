@@ -1,0 +1,19 @@
+//params
+lines_per_field = 6 = 6
+lines_per_gutter = 1 = 1
+h_fields = 4 = 4
+v_fields = 6 = 6
+box_height = 452.572 = 452.572
+box_width = 678.858 = 678.858
+h_text = 11.9932 = 11.9932
+
+//calcs
+lines = lines_per_field * h_fields + lines_per_gutter(h_fields - 1) = 27
+total_text = h_text * lines = 323.8164
+per_line_spacing = (box_height - total_text) / (lines - 1) = 4.9521385
+
+//output
+leading = per_line_spacing + h_text = 16.9453385
+h_gutter = 2 * per_line_spacing + h_text = 21.8974769
+h_field = (box_height - h_gutter * (h_fields - 1)) / h_fields = 96.7198923
+v_gutter = (box_width - v_fields * h_field) / (v_fields - 1) = 19.7077292
