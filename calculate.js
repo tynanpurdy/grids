@@ -24,3 +24,15 @@ const leading = getLeading()
 const h_gutter = 2 * per_line_spacing + h_text
 const h_field = (box_height - h_gutter * (rows - 1)) / rows
 const v_gutter = (box_width - columns * h_field) / (columns - 1)
+
+window.onload = function() {
+    let c = document.getElementById("textDatum");
+    let ctx = c.getContext("2d");
+
+    ctx.font = "18px Futura";
+
+    let fM = ctx.measureText("A"); // a character with the maximum height
+    let txtH = fM.actualBoundingBoxAscent + fM.actualBoundingBoxDescent;
+
+    ctx.fillText("Height: " + txtH, 5, 80);
+}
