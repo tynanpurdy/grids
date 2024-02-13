@@ -2,7 +2,7 @@
   "name": "grids",
   "version": "1.0.0",
   "description": "Proportional Grid Generator",
-  "main": "main.js",
+  "main": "./src/index.js",
   "scripts": {
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -22,6 +22,9 @@
     "electron": "^17.4.7"
   },
   "dependencies": {
-    "bootstrap": "^5.1.3"
+    "bootstrap": "^5.1.3",
+    "font-picker": "^3.5.1",
+    "modules": "^0.4.0",
+    "node": "^21.6.1"
   }
 }

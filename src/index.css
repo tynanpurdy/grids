@@ -1,0 +1,37 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: 15rem auto;
+  /* grid-gap: 10px;  */
+}
+
+.header {
+  padding: 10px;
+  border: black solid 1px;
+}
+
+.sidebar {
+  border: black solid 1px;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  border: red solid 1px;
+  padding: 1rem;
+}
+
+#page {
+  width: 400px;
+  height: 400px;
+  border: black solid 1px;
+  /* background-color: var(--neutral-5); */
+}
+
+#textDatum {
+  border: var(--neutral-5) solid 1px;
+}
+
+body {
+  font-family: Helvetica, sans-serif;
+}
