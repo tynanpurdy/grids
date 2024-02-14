@@ -1,24 +1,46 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  display: flex;
+  font-family: Helvetica, sans-serif;
+  justify-content: center;
+  align-items: center;
+}
+
 .grid-container {
   display: grid;
+  flex: 1;
+  height: 100%;
   grid-template-columns: 15rem auto;
-  /* grid-gap: 10px;  */
+  grid-template-rows: 3rem auto;
+  grid-template-areas: 
+    "sidebar header"
+    "sidebar main";
 }
 
 .header {
-  padding: 10px;
   border: black solid 1px;
+  grid-area: header;
 }
 
 .sidebar {
+  padding: 1rem;
   border: black solid 1px;
+  grid-area: sidebar;
 }
 
 .main {
+  grid-area: main;
   display: flex;
   justify-content: center;
   align-content: center;
   border: red solid 1px;
   padding: 1rem;
+  overflow: auto;
 }
 
 #page {
@@ -33,12 +55,4 @@
 
 .grid-item {
   background-color: lightgray;
-}
-
-#textDatum {
-  border: var(--neutral-5) solid 1px;
-}
-
-body {
-  font-family: Helvetica, sans-serif;
 }

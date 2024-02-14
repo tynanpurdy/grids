@@ -94,3 +94,14 @@ async function renderPage() {
         page.appendChild(gridItem)
     }
 }
+
+async function measureType() {
+    let c = document.getElementById("measuringStick")
+    let ctx = c.getContext("2d")
+
+    ctx.font = "18px Futura"
+
+    let fM = ctx.measureText("A") // a character with the maximum height
+    textHeight = fM.actualBoundingBoxAscent + fM.actualBoundingBoxDescent
+    console.log(textHeight)
+}
