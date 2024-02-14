@@ -1,21 +1,27 @@
 // initialize input variables
-let page = document.getElementById("page")
-let liveAreaWidthInput = document.getElementById("width")
-let liveAreaWidth = liveAreaWidthInput.value
-let liveAreaHeightInput = document.getElementById("height")
-let liveAreaHeight = liveAreaHeightInput.value
-
 let userInput = document.getElementById("userInput")
-let rowsInput = document.getElementById("rows")
-let columnsInput = document.getElementById("columns")
-let linesPerFieldInput = document.getElementById("linesPerField")
-let linesPerGutterInput = document.getElementById("linesPerGutter")
+
+let page = document.getElementById("page")
+let pageWidthInput = document.getElementById("pageWidthInput")
+let pageHeightInput = document.getElementById("pageHeightInput")
+let pageUnitsInput = document.getElementById("pageUnitsInput")
+
+// let liveAreaWidthInput = document.getElementById("width")
+// let liveAreaWidth = liveAreaWidthInput.value
+// let liveAreaHeightInput = document.getElementById("height")
+// let liveAreaHeight = liveAreaHeightInput.value
+
+let rowsInput = document.getElementById("rowsInput")
+let colsInput = document.getElementById("colsInput")
+// let linesPerFieldInput = document.getElementById("linesPerField")
+// let linesPerGutterInput = document.getElementById("linesPerGutter")
 
 // let fontInput = getActiveFont()
-let typeSizeInput = document.getElementById("size")
-let textHeight = typeSizeInput.value
+// let typeSizeInput = document.getElementById("typeSizeInput")
+let typeUnitsInput = document.getElementById("typeUnitsInput")
+// let textHeight = typeSizeInput.value
 
-//measure type
+// measure type
 window.onload = function() {
     let c = document.getElementById("measuringStick")
     let ctx = c.getContext("2d")
@@ -26,49 +32,65 @@ window.onload = function() {
     textHeight = fM.actualBoundingBoxAscent + fM.actualBoundingBoxDescent
     console.log(textHeight)
 
-    ctx.fillText("Height: " + textHeight, 5, 80)
-
     updateValues()
 }
 
-userInput.addEventListener('change', () => {
+userInput.addEventListener('input', () => {
     console.log("input change detected")
     updateValues()
 });
 
 function updateValues() {
+    console.log("updating values...")
+
     // params
-    let liveAreaHeight = liveAreaHeightInput.value // live area height dimension
-    let liveAreaWidth = liveAreaWidthInput.value // live area width dimension
-    let rows = rowsInput.value // grid rows
-    let columns = columnsInput.value // grid columns
-    let linesPerField = linesPerFieldInput.value // lines of text per grid field
-    let linesPerGutter = linesPerGutterInput.value // lines of text between grid fields
 
-    // calcs
-    let lines = linesPerField * rows + linesPerGutter * (rows - 1) // total lines of text in live area
-    let total_text = textHeight * lines // total height of live area
-    let perLineSpacing = (liveAreaHeight - total_text) / (lines - 1) // vertical whitespace between lines of text
-    let leading = perLineSpacing + textHeight // height of a single line of text, might need to change based on how css renders a line and its leading (aka line spacing)
+    // let liveAreaHeight = liveAreaHeightInput.value + "px" // live area height dimension
+    // console.log("liveAreaHeight: " + liveAreaHeight)
+    // let liveAreaWidth = liveAreaWidthInput.value + "px" // live area width dimension
+    // let rows = rowsInput.value // grid rows
+    // let columns = colsInput.value // grid columns
+    // let linesPerField = linesPerFieldInput.value // lines of text per grid field
+    // let linesPerGutter = linesPerGutterInput.value // lines of text between grid fields
 
-    let horizontalGutter = 2 * perLineSpacing + textHeight // horizontal gutter dimension
-    let fieldHeight = (liveAreaHeight - horizontalGutter * (rows - 1)) / rows // grid field height dimension
-    let verticalGutter = (liveAreaWidth - columns * fieldHeight) / (columns - 1) // vertical gutter dimension
-    let fieldWidth = (liveAreaWidth - verticalGutter * (columns - 1)) / columns // grid field width dimension
+    // // calcs
+    // let lines = linesPerField * rows + linesPerGutter * (rows - 1) // total lines of text in live area
+    // let total_text = textHeight * lines // total height of live area
+    // let perLineSpacing = (liveAreaHeight - total_text) / (lines - 1) // vertical whitespace between lines of text
+    // let leading = perLineSpacing + textHeight // height of a single line of text, might need to change based on how css renders a line and its leading (aka line spacing)
+
+    // let horizontalGutter = 2 * perLineSpacing + textHeight // horizontal gutter dimension
+    // let fieldHeight = (liveAreaHeight - horizontalGutter * (rows - 1)) / rows // grid field height dimension
+    // let verticalGutter = (liveAreaWidth - columns * fieldHeight) / (columns - 1) // vertical gutter dimension
+    // let fieldWidth = (liveAreaWidth - verticalGutter * (columns - 1)) / columns // grid field width dimension
 
     // render
     renderPage()
 }
 
-function renderPage() {
-    // live area
-    page.style.width = liveAreaWidth
-    page.style.height = liveAreaHeight
-    console.log("page set to " + page.style.width + " by " + page.style.height)
+async function renderPage() {
+    // page
+    page.style.width = pageWidthInput.value + pageUnitsInput.value
+    page.style.height = pageHeightInput.value + pageUnitsInput.value
 
     // font
-    page.style.fontSize = typeSizeInput.value
-    console.log("page font size set to " + page.style.fontSize)
+    page.style.fontSize = typeSizeInput.value + typeUnitsInput.value
 
     // grid
+    const rows = parseInt(rowsInput.value);
+    const cols = parseInt(colsInput.value);
+    const spacing = 5
+
+    page.style.setProperty('--spacing', spacing + 'px')
+    page.style.gridTemplateColumns = `repeat(${cols}, 1fr)`
+    page.style.gridTemplateRows = `repeat(${rows}, 1fr)`
+
+    page.innerHTML = ''; // Clear previous grid
+
+    for (let i = 0; i < rows * cols; i++) {
+        const gridItem = document.createElement('div')
+        gridItem.classList.add('grid-item')
+        gridItem.innerText = "Lorem ipsum"
+        page.appendChild(gridItem)
+    }
 }

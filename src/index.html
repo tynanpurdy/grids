@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./index.css">
         <script defer src="./render.js"></script>
         <title>Grids</title>
@@ -17,29 +17,36 @@
                 <div id="pageParams" class="form-group">
                     <h4>Page</h4>
                     <label for="width">Page width:</label>
-                    <input type="number" class="form-control" id="width" name="width" min="1" max="1000" value="500">
+                    <input type="number" class="form-control" id="pageWidthInput" min="1" max="1000" value="400">
 
                     <label for="height">Page height:</label>
-                    <input type="number" class="form-control" id="height" name="height" min="1" max="1000" value="800">
+                    <input type="number" class="form-control" id="pageHeightInput" min="1" max="1000" value="400">
+
+                    <label for="pageUnits">Units:</label>
+                    <select class="form-control" id="pageUnitsInput">
+                        <option value="px">px</option>
+                        <option value="in">in</option>
+                        <option value="pt">pt</option>
+                    </select>
                 </div><br>
                 <div id="gridParams" class="form-group">
                     <h4>Grid</h4>
                     <label for="rows">Rows:</label>
-                    <input type="number" class="form-control" id="rows" name="rows" min="1" max="100" value="1">
+                    <input type="number" class="form-control" id="rowsInput" min="1" max="100" value="1">
 
                     <label for="columns">Columns:</label>
-                    <input type="number" class="form-control" id="columns" name="columns" min="1" max="100" value="1">
+                    <input type="number" class="form-control" id="colsInput" min="1" max="100" value="1">
 
                     <label for="linesPerField">Lines per Field:</label>
-                    <input type="number" class="form-control" id="linesPerField" name="linesPerField" min="0" max="100" value="1">
+                    <input type="number" class="form-control" id="linesPerField" min="0" max="100" value="1">
 
                     <label for="linesPerGutter">Lines per Gutter:</label>
-                    <input type="number" class="form-control" id="linesPerGutter" name="linesPerGutter" min="0" max="100" value="1">
+                    <input type="number" class="form-control" id="linesPerGutter" min="0" max="100" value="1">
                 </div><br>
                 <div id="typeParams" class="form-group">
                     <h4>Type</h4>
                     <label for="typeUnits">Units:</label>
-                    <select class="form-control" id="typeUnits" name="typeUnits">
+                    <select class="form-control" id="typeUnitsInput">
                         <option value="px">px</option>
                         <option value="pt">pt</option>
                         <option value="pica">picas</option>
@@ -47,7 +54,7 @@
 
                     <label for="font">Font:</label>
                     <div id="font-picker"></div>
-                    <input type="number" class="form-control" id="size" name="size" min="1" max="400" value="12">
+                    <input type="number" class="form-control" id="typeSizeInput" min="1" max="400" value="12">
                 </div>
             </form>
         </div>
