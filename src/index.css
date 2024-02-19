@@ -2,16 +2,28 @@ body, html {
   margin: 0;
   padding: 0;
   height: 100%;
+  box-sizing: border-box;
 }
 
 body {
-  display: flex;
+  /* padding-top: 0.5rem; */
+  display: grid;
   font-family: Helvetica, sans-serif;
-  justify-content: center;
-  align-items: center;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  display: grid;
+  flex: 1;
+  height: 100vh;
+  grid-template-columns: 15rem auto;
+  grid-template-rows: 2.5rem auto;
+  grid-template-areas: 
+    "header header"
+    "sidebar main";
+  /* justify-content: center;
+  align-items: center; */
 }
 
-.grid-container {
+/* .grid-container {
   display: grid;
   flex: 1;
   height: 100%;
@@ -20,25 +32,34 @@ body {
   grid-template-areas: 
     "sidebar header"
     "sidebar main";
-}
+} */
 
 .header {
-  border: black solid 1px;
+  -webkit-app-region: drag;
   grid-area: header;
 }
 
 .sidebar {
+  -webkit-app-region: drag;
   padding: 1rem;
-  border: black solid 1px;
   grid-area: sidebar;
+  /* display: flex;
+  flex-direction: column;
+  gap: 1rem; */
+}
+
+/* interactables */
+input, select, #font-picker, button {
+  -webkit-app-region: no-drag;
 }
 
 .main {
   grid-area: main;
   display: flex;
   justify-content: center;
-  align-content: center;
-  border: red solid 1px;
+  align-items: center;
+  border: gray solid 1px;
+  border-radius: 8px;
   padding: 1rem;
   overflow: auto;
 }
