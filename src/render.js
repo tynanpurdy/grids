@@ -1,3 +1,18 @@
+//// MODULES ////
+// configure enviroment varaibles vault
+require('dotenv').config();
+const apiKey = process.env.GOOGLE_FONTS_API_KEY;
+
+// initialize the font-picker module
+const FontPicker = require("font-picker")
+const fontPicker = new FontPicker(
+    apiKey, // Google API key
+    "Open Sans", // Default font
+    { limit: 30 }, // Additional options
+);
+
+
+//// VARIABLES ////
 // initialize input variables
 let userInput = document.getElementById("userInput")
 
@@ -16,32 +31,55 @@ let colsInput = document.getElementById("colsInput")
 // let linesPerFieldInput = document.getElementById("linesPerField")
 // let linesPerGutterInput = document.getElementById("linesPerGutter")
 
-// let fontInput = getActiveFont()
-// let typeSizeInput = document.getElementById("typeSizeInput")
+let fontInput = fontPicker.getActiveFont().family // once I figure out using the FontPicker package I can use it's functions here
+let currentFont = page.style.fontFamily
+let typeSizeInput = document.getElementById("typeSizeInput")
 let typeUnitsInput = document.getElementById("typeUnitsInput")
-// let textHeight = typeSizeInput.value
+let textHeight = typeSizeInput.value
 
+
+//// EVENT HANDLERS ////
 // measure type
 window.onload = function() {
+    // measureType()
+    updateValues()
+    renderPage()
+}
+
+// detect new inputs on the sidebar
+userInput.addEventListener('input', () => {
+    console.log("input change detected")
+    // measureType()
+    updateValues()
+    renderPage()
+});
+
+// since fontpicker is different from the other inputs, we also call updateValues() on a new font selection
+fontPicker.setOnChange(newFont => {
+    console.log(`New font selected: ${newFont.family}`);
+    // measureType()
+    updateValues(newFont)
+    renderPage()
+});
+
+
+//// FUNCTIONS ////
+function updateValues(newFont = fontPicker.getActiveFont()) {
+    console.log("updating values...")
+    
+    currentFont = newFont.family
+
     let c = document.getElementById("measuringStick")
     let ctx = c.getContext("2d")
 
-    ctx.font = "18px Futura"
+    let testFontStyle = typeSizeInput.value + typeUnitsInput.value + " " + currentFont
+    ctx.font = testFontStyle
+    console.log(testFontStyle)
 
     let fM = ctx.measureText("A") // a character with the maximum height
     textHeight = fM.actualBoundingBoxAscent + fM.actualBoundingBoxDescent
     console.log(textHeight)
 
-    updateValues()
-}
-
-userInput.addEventListener('input', () => {
-    console.log("input change detected")
-    updateValues()
-});
-
-function updateValues() {
-    console.log("updating values...")
 
     // params
 
@@ -63,12 +101,10 @@ function updateValues() {
     // let fieldHeight = (liveAreaHeight - horizontalGutter * (rows - 1)) / rows // grid field height dimension
     // let verticalGutter = (liveAreaWidth - columns * fieldHeight) / (columns - 1) // vertical gutter dimension
     // let fieldWidth = (liveAreaWidth - verticalGutter * (columns - 1)) / columns // grid field width dimension
-
-    // render
-    renderPage()
 }
 
-async function renderPage() {
+// draw the preview page with grid and text inputs applied
+function renderPage() {
     // page
     page.style.width = pageWidthInput.value + pageUnitsInput.value
     page.style.height = pageHeightInput.value + pageUnitsInput.value
@@ -95,13 +131,15 @@ async function renderPage() {
     }
 }
 
-async function measureType() {
-    let c = document.getElementById("measuringStick")
-    let ctx = c.getContext("2d")
+// measure the real dimensions of the defined body text
+// function measureType() {
+//     let c = document.getElementById("measuringStick")
+//     let ctx = c.getContext("2d")
 
-    ctx.font = "18px Futura"
+//     let testFontStyle = typeSizeInput.value + typeUnitsInput.value + " " + fontPicker.getActiveFont().family
+//     ctx.font = testFontStyle
 
-    let fM = ctx.measureText("A") // a character with the maximum height
-    textHeight = fM.actualBoundingBoxAscent + fM.actualBoundingBoxDescent
-    console.log(textHeight)
-}
+//     let fM = ctx.measureText("A") // a character with the maximum height
+//     textHeight = fM.actualBoundingBoxAscent + fM.actualBoundingBoxDescent
+//     console.log(textHeight)
+// }
