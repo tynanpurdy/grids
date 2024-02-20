@@ -9,7 +9,8 @@ const loadMainWindow = () => {
         width : 1500,
         height: 950,
         webPreferences: {
-            preload: path.join(__dirname, "preload.js")
+            contextIsolation: false,
+            nodeIntegration: true
         },
         show: false,
         frame: false,
